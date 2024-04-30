@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=bank
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  jdk:
+      image: danilo/springboot-architeture-ddd:0.0.1
+      container_name: jdk
+      depends_on:
+        - mongodb
+      ports:
+        - "8080:8080"
+
+volumes:
+  mongodb_data:
+    driver: local
